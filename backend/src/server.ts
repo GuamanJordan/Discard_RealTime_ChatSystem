@@ -1,9 +1,10 @@
 import express from 'express';
-import http from 'http';
+import http from 'node:http';
 import { Server } from 'socket.io';
 import cors from 'cors';
 import { connectDB } from './config/database.js';
 import adminRoutes from './routes/adminRoutes.js';
+
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server, {
@@ -31,5 +32,5 @@ io.on('connection', (socket) => {
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
-    console.log(`🚀 Servidor en puerto ${PORT}`);
+    console.log(` Servidor en puerto ${PORT}`);
 });

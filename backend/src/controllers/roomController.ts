@@ -22,7 +22,9 @@ export const createRoom = async (req: Request, res: Response) => {
 
         await newRoom.save();
         res.status(201).json(newRoom);
-    } catch (error) {
-        res.status(500).json({ message: 'Error al crear la sala.' });
+    } catch (error: unknown) {
+        const details = error instanceof Error ? error.message : 'Error desconocido';
+        console.error('Error al crear la sala:', details);
+        return res.status(500).json({ message: 'Error al crear la sala.' });
     }
 };
